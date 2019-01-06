@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+// 利用 styled-components 可以创建具有作用域到 css 样式
+// 引入全局样式
+import GlobalStyle from './style';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const Application = (
+  <Fragment>
+    <App />
+    {/* 利用 styled-components API 定义的全局样式也是一个 class 组件，需要按照 react 组件的写法将样式写入应用中 */}
+    <GlobalStyle />
+  </Fragment>
+)
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(Application, document.getElementById('root'));
+
