@@ -1,6 +1,6 @@
 // 利用 styled API 来创建具有私有样式的组件
 import styled from 'styled-components'
-import logoPic from '../../statics/logo.png'
+import logoPic from '../../statics/images/logo.png'
 
 // 用法：styled.标签名`样式`，在双引号中填写样式
 // 如果需要在标签上加入属性，可以写成：styled.标签名.attrs({属性名：值})`样式`
@@ -8,7 +8,7 @@ import logoPic from '../../statics/logo.png'
 export const HeaderWrapper = styled.div`
   height: 56px;
   border-bottom: 1px solid #f0f0f0;
-`;
+`
 
 export const WidthLimit = styled.div`
   margin: 0 auto;
@@ -27,6 +27,7 @@ export const Logo = styled.a.attrs({
   background: url(${logoPic});
   background-size: contain;
 `
+
 export const Nav = styled.div`
   width: 960px;
   height: 100%;
@@ -52,12 +53,34 @@ export const NavItem  = styled.div`
   }
 `
 
+export const SearchWrapper = styled.div`
+  float: left;
+  position: relative;
+
+  /* 在 styled-components 中也可以是用嵌套编程的方式写 css */
+  .iconfont {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    width: 30px;
+    line-height: 30px;
+    border-radius: 15px;
+    text-align: center;
+
+    &.focused {
+      background: #777;
+      color: #fff;
+    }
+  }
+`
+
 export const NavSearch = styled.input.attrs({
   placeholder: '搜索'
 })`
   width: 160px;
   height: 38px;
-  padding: 0 20px;
+  padding: 0 38px 0 20px;
+  color: #666;
   margin-top: 9px;
   margin-left: 20px;
   box-sizing: border-box;
@@ -66,8 +89,58 @@ export const NavSearch = styled.input.attrs({
   border-radius: 19px;
   background: #eee;
   font-size: 14px;
+  transition: all .2s ease-out;
   &::placeholder {
     color: #999;
+  }
+  &.focused {
+    width: 240px;
+  }
+`
+
+export const SearchInfo = styled.div`
+  position: absolute;
+  left: 0;
+  top: 56px;
+  width: 240px;
+  padding: 0 20px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+`
+
+export const SearchInfoTitle = styled.div`
+  margin-top: 20px;
+  margin-bottom: 15px;
+  line-height: 20px;
+  font-size: 14px;
+  color: #969696;
+`
+
+export const SearchInfoSwitch = styled.span`
+  float: right;
+  font-size: 13px;
+  cursor: pointer;
+`
+
+export const SearchInfoList = styled.ul`
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+`
+
+export const SearchInfoItem = styled.li`
+  cursor: pointer;
+  line-height: 20px;
+  padding: 0 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  border: 1px solid #ddd;
+  color: #787878;
+  border-radius: 3px;
+
+  &:hover {
+    color: #333;
+    border-color: #b4b4b4;
   }
 `
 
