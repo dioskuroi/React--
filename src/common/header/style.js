@@ -58,7 +58,7 @@ export const SearchWrapper = styled.div`
   position: relative;
 
   /* 在 styled-components 中也可以是用嵌套编程的方式写 css */
-  .iconfont {
+  .zoom {
     position: absolute;
     right: 5px;
     bottom: 5px;
@@ -77,7 +77,7 @@ export const SearchWrapper = styled.div`
 export const NavSearch = styled.input.attrs({
   placeholder: '搜索'
 })`
-  width: 160px;
+  width: 260px;
   height: 38px;
   padding: 0 38px 0 20px;
   color: #666;
@@ -89,18 +89,18 @@ export const NavSearch = styled.input.attrs({
   border-radius: 19px;
   background: #eee;
   font-size: 14px;
-  transition: all .2s ease-out;
+  transition: all .4s ease-out;
   &::placeholder {
     color: #999;
   }
   &.focused {
-    width: 240px;
+    width: 350px;
   }
 `
 
 export const SearchInfo = styled.div`
   position: absolute;
-  left: 0;
+  left: 20px;
   top: 56px;
   width: 240px;
   padding: 0 20px;
@@ -119,6 +119,22 @@ export const SearchInfoSwitch = styled.span`
   float: right;
   font-size: 13px;
   cursor: pointer;
+  user-select: none;
+
+  .spin {
+    float: left;
+    font-size: 12px;
+    vertical-align: middle;
+    line-height: 12px;
+    margin-right: 2px;
+    margin-top: 5px;
+    transform-origin: center center;
+
+    &.rotate {
+      transition: all .3s;
+      transform: rotate(360deg);
+    }
+  }
 `
 
 export const SearchInfoList = styled.ul`
