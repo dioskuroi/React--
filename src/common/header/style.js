@@ -17,9 +17,7 @@ export const WidthLimit = styled.div`
   height: 100%;
 `
 
-export const Logo = styled.a.attrs({
-  href: '/'
-})`
+export const Logo = styled.div`
   width: 100px;
   height: 100%;
   display: block;
@@ -105,6 +103,7 @@ export const SearchInfo = styled.div`
   width: 240px;
   padding: 0 20px;
   box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+  background: #fff;
 `
 
 export const SearchInfoTitle = styled.div`
@@ -120,19 +119,20 @@ export const SearchInfoSwitch = styled.span`
   font-size: 13px;
   cursor: pointer;
   user-select: none;
+  vertical-align: middle;
 
   .spin {
     float: left;
     font-size: 12px;
-    vertical-align: middle;
-    line-height: 12px;
+    text-align: center;
+    line-height: 1;
     margin-right: 2px;
     margin-top: 5px;
-    transform-origin: center center;
+    transform-origin:  5px 6px ;
 
     &.rotate {
-      transition: all .3s;
-      transform: rotate(360deg);
+      transition: all .3s ease;
+      transform: rotate(720deg);
     }
   }
 `

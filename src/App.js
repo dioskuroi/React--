@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux'
 
+import AppRouter from './router'
 import store from './store'
-import Header from './common/header'
 // 利用 styled-components 可以创建具有作用域到 css 样式
 // 引入全局样式
 import ResetStyle from './style';
@@ -16,8 +16,7 @@ class App extends Component {
         需要按照 react 组件的写法将样式写入应用中 */}
         <ResetStyle />
         <IconStyle />
-
-        <Header></Header>
+        <AppRouter></AppRouter>
       </Provider>
     );
   }

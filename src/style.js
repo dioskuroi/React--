@@ -32,6 +32,9 @@ export default createGlobalStyle`
   body {
     line-height: 1;
   }
+  html, body {
+    scroll-behavior: smooth;
+  }
   ol, ul {
     list-style: none;
   }
@@ -46,5 +49,13 @@ export default createGlobalStyle`
   table {
     border-collapse: collapse;
     border-spacing: 0;
+  }
+  button {
+    outline: none;
+  }
+
+  /* 取消 Link 组件的默认下划线样式 */
+  a:-webkit-any-link {
+    text-decoration: none!important;
   }
 `
