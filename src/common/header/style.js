@@ -8,6 +8,8 @@ import logoPic from '../../statics/images/logo.png'
 export const HeaderWrapper = styled.div`
   height: 56px;
   border-bottom: 1px solid #f0f0f0;
+  position: relative;
+  z-index: 1;
 `
 
 export const WidthLimit = styled.div`
@@ -45,6 +47,7 @@ export const NavItem  = styled.div`
   &.right {
     float: right;
     color: #969696;
+    cursor: pointer;
   }
   &.active {
     color: #ea6f5a;

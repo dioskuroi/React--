@@ -12,7 +12,7 @@
 // fork（异步函数, 参数1, 参数2, ...） : 用来调用异步函数，并且可以为异步函数传入参数，
 //                                    不管代码是否被执行完毕，代码不会阻塞
 // select(state => ...) : 用来获取 store 中的数据，接受一个回调函数作为参数，该回调函数的参数是 state
-import { takeEvery, put, call } from 'redux-saga/effects'
+import { takeEvery, put, call, takeLatest } from 'redux-saga/effects'
 import {
   actionTypes as headerActionTypes,
   actionCreators as headerActionCreators
@@ -21,7 +21,16 @@ import {
   actionTypes as homeActionTypes,
   actionCreators as homeActionCreators
 } from '../views/home/store'
-import { getHeaderList, getHomeData, getMoreList } from '../api/getData'
+import {
+  actionTypes as detailActionTypes,
+  actionCreators as detailActionCreators
+} from '../views/detail/store'
+import {
+  actionTypes as loginActionTypes,
+  actionCreators as loginActionCreators
+} from '../views/login/store'
+
+import { getHeaderList, getHomeData, getMoreList, getDetailData, login } from '../api/getData'
 
 function* getHeaderListHandler() {
   const { data } = yield call(getHeaderList)
@@ -44,6 +53,20 @@ function* getMoreListHandler(action) {
   }
 }
 
+function* getDetailDataHandler(action) {
+  const { data } = yield call(getDetailData, action.data)
+  if (data.success === true) {
+    yield put(detailActionCreators.changeDetailData(data.data))
+  }
+}
+
+function* loginHandler(action) {
+  const { data } = yield call(login, action.data)
+  if (data.success === true) {
+    yield put(loginActionCreators.changeIsLogin(data.data))
+  }
+}
+
 function* headerListSaga() {
   yield takeEvery(headerActionTypes.GET_HEADER_LIST, getHeaderListHandler)
 }
@@ -56,4 +79,12 @@ function* moreListSaga() {
   yield takeEvery(homeActionTypes.GET_MORE_LIST, getMoreListHandler)
 }
 
-export default [headerListSaga, homeDataSaga, moreListSaga]
+function* detailDataSaga() {
+  yield takeEvery(detailActionTypes.GET_DETAIL_DATA, getDetailDataHandler)
+}
+
+function* loginSaga() {
+  yield takeLatest(loginActionTypes.LOGIN, loginHandler)
+}
+
+export default [headerListSaga, homeDataSaga, moreListSaga, detailDataSaga, loginSaga]

@@ -120,5 +120,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "react-loadable": "^5.5.0"
   }
 }

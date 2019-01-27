@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { actionCreators } from './store'
+import { actionCreators as loginActionCreators } from '../../views/login/store'
 import {
   HeaderWrapper,
   WidthLimit,
@@ -73,7 +74,7 @@ class Header extends PureComponent {
   }
 
   render() {
-    const { focused, list, handleInputFocus, handleInputBlur } = this.props
+    const { focused, list, handleInputFocus, handleInputBlur, isLogin, logout } = this.props
     return (
       <HeaderWrapper>
         <WidthLimit>
@@ -90,9 +91,18 @@ class Header extends PureComponent {
             </Button>
           </Addition>
           <Nav>
-            <NavItem className="left active">首页</NavItem>
+            <Link to="/">
+              <NavItem className="left active">首页</NavItem>
+            </Link>
             <NavItem className="left">下载App</NavItem>
-            <NavItem className="right">登录</NavItem>
+            {
+              isLogin ? 
+                <NavItem className="right" onClick={ logout }>退出</NavItem> : 
+                <Link to="/login">
+                  <NavItem className="right">登录</NavItem>
+                </Link>
+            }
+            
             <NavItem className="right">
               <i className="iconfont">&#xe636;</i>
             </NavItem>
@@ -126,7 +136,8 @@ const mapStateToProps = state => ({
   mouseIn: state.getIn(['header', 'mouseIn']),
   page: state.getIn(['header', 'page']),
   totalPage: state.getIn(['header', 'totalPage']),
-  list: state.getIn(['header', 'list'])
+  list: state.getIn(['header', 'list']),
+  isLogin: state.getIn(['login', 'isLogin'])
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -151,6 +162,9 @@ const mapDispatchToProps = dispatch => ({
       spin.classList.remove('rotate')
     }, 300);
     dispatch(actionCreators.changePage(page, totalPage))
+  },
+  logout() {
+    dispatch(loginActionCreators.logout())
   }
 })
 

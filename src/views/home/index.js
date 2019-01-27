@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+// 引入 withRouter 可以包装一下组件就可以在组件中使用 this.props.history.push() 来操作路由了
+import { withRouter } from 'react-router-dom'
 import { actionCreators } from './store'
 import Topic from './components/topic'
 import List from './components/list'
@@ -16,6 +18,8 @@ import {
 // PureComponent 相比于 Component ，内部自动添加了 shouldComponentUpdate 的生命周期函数，
 // 如果这个组件的数据没有发生变化，就不会重新执行 render 函数。
 // 注意：如果项目中没有用 immutalbe.js 管理数据，却使用了 PureComponent 可能会有潜在的问题。
+// 推荐做法：1. 使用 immutable.js 来管理数据，使用 PureComponent 来创建组件。
+//         2. 使用 Component 来创建组件，自己手动在组件中添加 shouldComponentUpdate 生命周期函数优化性能。
 class Home extends PureComponent {
   handleBackTop() {
     window.scrollTo(0, 0)
@@ -48,6 +52,10 @@ class Home extends PureComponent {
   componentDidMount() {
     this.props.getHomeData()
     this.bindEvent()
+    // 使用 this.props.history.push() 来操作路由
+    // setTimeout(() => {
+    //   this.props.history.push({ pathname: '/detail', query: { id: 1 } })
+    // }, 1000);
   }
 }
 
@@ -69,4 +77,5 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+// 利用 withRouter 高阶组件来包装 Home 组件
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home))

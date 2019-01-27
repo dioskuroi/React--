@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react'
 // 引入 BrowserRouter 和 Route 组件
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route,  } from 'react-router-dom'
 import Home from '../views/home'
-import Detail from '../views/detail'
+// 将引入的组件改为 loadable 包装后导出的组件即可实现异步加载组件
+import Detail from '../views/detail/loadable'
 import Header from '../common/header'
+import Login from '../views/login'
 
 
 const AppRouter = () => {
@@ -19,7 +21,13 @@ const AppRouter = () => {
             component 属性用来设置跳转到该路径时显示的组件
         */}
         <Route path="/" exact component={ Home }></Route>
-        <Route path="/detail" exact component={ Detail }></Route>
+        {/* 利用地址栏传参有两种方式：
+              1. path="/detail/:id"，和 Vue 的传参方式一样，获取参数的方法为：this.props.match.params.id
+              2. this.props.history.push({ pathname: '/detail', query: { id: id } })，
+                 获取参数的方法：this.props.location.query.id
+        */}
+        <Route path="/detail/:id" exact component={ Detail }></Route>
+        <Route path="/login" exact component={ Login }></Route>
       </Fragment>
     </BrowserRouter>
   )

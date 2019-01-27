@@ -18,3 +18,17 @@ export const getMoreList = (params) => {
     params
   })
 }
+
+export const getDetailData = (params) => {
+  return axios({
+    url: '/mock/detail.json',
+    params
+  })
+}
+
+export const login = (params) => {
+  return axios({
+    url: '/mock/login.json',
+    params
+  })
+}

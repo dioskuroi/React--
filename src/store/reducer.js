@@ -6,11 +6,15 @@ import { combineReducers } from 'redux-immutable'
 
 import { reducer as headerReducer } from '../common/header/store'
 import { reducer as homeReducer } from '../views/home/store'
+import { reducer as detailReducer } from '../views/detail/store'
+import { reducer as loginReducer } from '../views/login/store'
 
 // 用法：combineReducers({ 子 reducer 的名字: 子 reducer })
 // 当组合以后，使用 state 中的数据时就会多一层子 reducer 的名称包裹，
 // 这是为了防止多个子 reducer 的 命名冲突
 export default combineReducers({
   header: headerReducer,
-  home: homeReducer
+  home: homeReducer,
+  detail: detailReducer,
+  login: loginReducer
 })
